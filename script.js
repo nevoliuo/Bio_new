@@ -176,7 +176,23 @@ function drawAxes(centerY, width, height, range, targetDate) {
         const label = labelDate.toLocaleDateString("ru-RU").slice(0, 5);
         ctx.fillText(label, x, centerY + 24);
     }
-  
+
+    // Устанавливаем пунктир по оси X
+    ctx.strokeStyle = "#555";
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([4, 4]);
+
+    for (let offset = -range; offset <= range; offset++) {
+        if (offset === 0) continue;
+        const x = marginX + ((offset + range) / (range * 2)) * (width - 2 * marginX);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+    }
+
+    ctx.setLineDash([]);
+
     // Подписи значений на оси Y
     ctx.textAlign = "left";
     const ySteps = 4;
@@ -185,6 +201,22 @@ function drawAxes(centerY, width, height, range, targetDate) {
         ctx.fillStyle = "#999";
         ctx.fillText((i / ySteps).toFixed(1), 5, y - 2);
     }
+
+    // Устанавливаем пунктир по оси Y
+    ctx.strokeStyle = "#555";
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([4, 4]);  
+
+     for (let i = -ySteps; i <= ySteps; i++) {
+        if (i === 0) continue;
+        const y = centerY - (i / ySteps) * (height * 0.4);
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+    }
+
+    ctx.setLineDash([]); 
 }
   
 let animationFrame;
@@ -382,6 +414,19 @@ document.getElementById('clear-people').addEventListener('click', () => {
     btn.classList.add('shake');
     setTimeout(() => btn.classList.remove('shake'), 500);
   });
+
+  // Обработчик кнопки выбора всех
+document.getElementById('select-all-people').addEventListener('click', () => {
+    document.querySelectorAll('.person-checkbox').forEach(checkbox => {
+      checkbox.checked = true;
+    });
+    drawGraph();
+  
+    // Анимация кнопки
+    const btn = document.getElementById('select-all-people');
+    btn.classList.add('shake');
+    setTimeout(() => btn.classList.remove('shake'), 500);
+  });  
 
 // Функция для анализа корреляции биоритмов
 function analyzeCorrelation() {

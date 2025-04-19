@@ -94,7 +94,6 @@ canvas {
 
 .people-controls .checkboxes label {
   position: relative;
-  padding-left: 2rem;
   margin: 0;
   cursor: pointer;
   transition: all 0.2s;
@@ -112,26 +111,30 @@ canvas {
   width: 0;
 }
 
-.people-controls .checkboxes .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1.2rem;
-  width: 1.2rem;
+.people-controls .checkboxes label:has(input[type="checkbox"]:checked),
+.biorhythm-controls .checkboxes label:has(input[type="checkbox"]:checked) {
+  background-color: #464667;
+  box-shadow: 0 0 6px rgba(213, 162, 255, 0.25);
+  color: #ffffff;
+}
+
+.people-controls .checkboxes label:hover,
+.biorhythm-controls .checkboxes label:hover {
+  background-color: #393954;
+  color: #dddddd;
+}
+
+.people-controls .checkboxes label,
+.biorhythm-controls .checkboxes label {
+  padding: 0.5em 1em;
   background-color: #2c2c3e;
-  border: 2px solid #d5a2ff;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.people-controls .checkboxes label:hover .checkmark {
-  border-color: #f0f0f0;
-  box-shadow: 0 0 8px rgba(213, 162, 255, 0.4);
-}
-
-.people-controls .checkboxes input:checked ~ .checkmark {
-  background-color: #444;
-  border-color: #d5a2ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 600;
+  color: #bbbbbb;
+  display: flex;
+  align-items: center;
 }
 
 /* Стили для чекбоксов биоритмов */
@@ -143,7 +146,6 @@ canvas {
 
 .biorhythm-controls .checkboxes label {
   position: relative;
-  padding-left: 2.2rem;
   margin: 0;
   cursor: pointer;
   transition: all 0.2s;
@@ -161,45 +163,9 @@ canvas {
   width: 0;
 }
 
-.biorhythm-controls .checkboxes .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 1.2rem;
-  width: 1.2rem;
-  background-color: #2c2c3e;
-  border: 2px solid #d5a2ff;
-  border-radius: 50%;
-  transition: all 0.2s;
-}
-
-.biorhythm-controls .checkboxes label:hover .checkmark {
-  box-shadow: 0 0 8px rgba(213, 162, 255, 0.4);
-  transform: scale(1.1);
-}
-
-.biorhythm-controls .checkboxes input:checked ~ .checkmark {
-  background-color: #444;
-  border-color: #d5a2ff;
-}
-
-/* Общие стили для галочек */
-.checkmark:after {
-  content: "";
-  position: absolute;
+.people-controls .checkboxes input[type="checkbox"],
+.biorhythm-controls .checkboxes input[type="checkbox"] {
   display: none;
-  left: 50%;
-  top: 50%;
-  width: 0.4rem;
-  height: 0.8rem;
-  border: solid #d5a2ff;
-  border-width: 0 2px 2px 0;
-  transform: translate(-50%, -60%) rotate(45deg);
-}
-
-.people-controls .checkboxes input:checked ~ .checkmark:after,
-.biorhythm-controls .checkboxes input:checked ~ .checkmark:after {
-  display: block;
 }
 
 .person-name {
@@ -207,8 +173,8 @@ canvas {
 }
 
 .people-controls .checkboxes label:hover .person-name {
-  text-shadow: 0 0 8px currentColor;
-  transform: scale(1.05);
+  text-shadow: none;
+  transform: none;
 }
 
 .people-controls .checkboxes label {
@@ -218,24 +184,26 @@ canvas {
 }
 
 .clear-btn {
-  margin-left: 8rem;
-  background: none;
-  border: none;
+  background-color: #2c2c3e;
+  color: #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5em 1em;
   cursor: pointer;
-  color: #d5a2ff;
-  border-radius: 4px;
-  transition: all 0.2s;
+  transition: background-color 0.3s, transform 0.2s;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .clear-btn:hover {
-  color: #f0f0f0;
-  background-color: #d5a2ff33;
+  background-color: #35354a;
+  transform: scale(1.05);
 }
 
 .clear-btn svg {
   vertical-align: middle;
 }
-
 /* Анимация встряски */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
